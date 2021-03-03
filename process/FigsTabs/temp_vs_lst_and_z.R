@@ -19,8 +19,15 @@ jpeg("./output/FigsTabs/temp_vs_lst_z_tmax.jpg",
 pairs(tmax_pairs, cex = .1)
 dev.off()
 
+jpeg("./output/FigsTabs/temp_vs_lst_z_tmax_ag10.jpg", 
+     width = 950, height = 950, res = 200)
+pairs(aggregate(tmax_pairs, 10), cex = .1)
+dev.off()
 
-
+jpeg("./output/FigsTabs/temp_vs_lst_z_tmax_de10.jpg", 
+     width = 950, height = 950, res = 200)
+pairs(disaggregate(tmax_pairs, 10, method = "bilinear"), cex = .1)
+dev.off()
 #
 
 tmin_pairs <- brick(mean(tmin), mean(lst_night), z)

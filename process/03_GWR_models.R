@@ -122,7 +122,7 @@ for(i in 1:12){
 
   data_model <- rasterToPoints(brick_model, fun=NULL, spatial=TRUE)
   data_model <- data_model[complete.cases(data_model@data),]
-  pairs(data_model@data[, c("Temp", "LST", "Z")])
+  #pairs(data_model@data[, c("Temp", "LST", "Z")])
   bw <- GWmodel::bw.gwr(Temp ~ LST + Z, data = data_model,
                         approach = "AICc",
                         kernel = "bisquare",

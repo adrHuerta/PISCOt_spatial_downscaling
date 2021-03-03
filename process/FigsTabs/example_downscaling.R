@@ -75,6 +75,14 @@ plot(bw_sel, AICc_sel, type = "o",
      xlab = "Bandwith", ylab = "AICc", col = "black")
 dev.off()
 
+jpeg("./output/FigsTabs/bw_selection_zoom.jpg", 
+     width = 1000, height = 700, res = 200)
+plot(bw_sel, AICc_sel, type = "o",
+     xlab = "Bandwith", 
+     xlim = c(0, 100),
+     ylim = c(0, 4500),
+     ylab = "AICc", col = "black")
+dev.off()
 
 brick_model <- brick(tmax[[i]],lst_day[[i]], z)
 names(brick_model) <- c("Temp", "LST", "Z")

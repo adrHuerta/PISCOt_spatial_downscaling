@@ -25,7 +25,7 @@ tmin_normal <- brick(
   })
 )
 
-parallel::mclapply(12054:length(PISCOts),
+parallel::mclapply(1:length(PISCOts),
                    function(i){
           
   anom_tmax <- raster(file.path(".", "data", "processed", "PISCOt", "anomalies",
@@ -54,6 +54,6 @@ parallel::mclapply(12054:length(PISCOts),
   writeRaster(PISCOtmin, file.path(".", "data", "processed", "PISCOt_DS", "values", "tmin",
                                    paste("tmin_", time(PISCOts[i]), ".nc", sep = "")))
 
-  }, mc.cores = 3)
+  }, mc.cores = 8)
 
 #fun::shutdown()
