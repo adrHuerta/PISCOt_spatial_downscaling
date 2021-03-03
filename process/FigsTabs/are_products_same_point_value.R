@@ -81,15 +81,27 @@ for(i in 1:ncol(ts_tmax)){
   qc_data$xyz$tmin_r[i] <- cor(qc_data$values$tmin["1981/2016"][, i],
                                ts_tmin[, i], use = "pairwise.complete.obs")
   
-  qc_data$xyz$tmax_b[i] <- hydroGOF::pbias(obs = as.numeric(qc_data$values$tmax["1981/2016"][, i]),
-                               sim = as.numeric(ts_tmax[, i]), na.rm = TRUE)
+
+  my_data <- data.frame(obs = as.numeric(qc_data$values$tmax["1981/2016"][, i]),
+                        model = as.numeric(ts_tmax[, i]))
+  qc_data$xyz$tmax_b[i] <- openair::modStats(my_data, mod = "model", obs = "obs", statistic = "MB")$MB
   
-  qc_data$xyz$tmin_b[i] <- hydroGOF::pbias(obs = as.numeric(qc_data$values$tmin["1981/2016"][, i]),
-                               sim = as.numeric(ts_tmin[, i]), na.rm = TRUE)
+  my_data <- data.frame(obs = as.numeric(qc_data$values$tmin["1981/2016"][, i]),
+                        model = as.numeric(ts_tmin[, i]))
+  qc_data$xyz$tmin_b[i] <- openair::modStats(my_data, mod = "model", obs = "obs", statistic = "MB")$MB
 
 }
 
 qc_data_exp <- qc_data$xyz[complete.cases(qc_data$xyz), ]
+
+
+jpeg("./output/FigsTabs/comparison_hist_bias.jpg", 
+     width = 1000, height = 1000, res = 150)
+hist(qc_data_exp$tmin_b, breaks = seq(-10, 10, .5), xlim = c(-10, 10), ylim = c(0, 70), border = "blue", cex = 2, main = "", xlab = "Diferencia (°C)", ylab = "Frecuencia")
+hist(qc_data_exp$tmax_b, breaks = seq(-10, 10, .5), xlim = c(-10, 10), ylim = c(0, 70), add = TRUE, border = "red", cex = 5)
+dev.off()
+
+
 qc_data_exp <- transform(qc_data_exp,
                          tmax_r = cut(tmax_r, 
                                       breaks = c(-Inf, .3, .4, .5, .6, .7, .8, .9, Inf),
@@ -104,21 +116,20 @@ qc_data_exp <- transform(qc_data_exp,
 
 qc_data_exp <- transform(qc_data_exp,
                          tmax_b = cut(tmax_b, 
-                                      breaks = c(-Inf, -20, -10, -5, 5, 10, 20, Inf),
-                                      labels = c("< -20",  "-20 - -10", "-10 - -5", "-5 - 5", "5 - 10", "10 - 20","> 20"),
+                                      breaks = c(-Inf, -5, -2, -1, 1, 2, 5, Inf),
+                                      labels = c("< -5",  "-5 - -2", "-2 - -1", "-1 - 1", "1 - 2", "2 - 5","> 5"),
                                       right = FALSE))
 
 qc_data_exp <- transform(qc_data_exp,
                          tmin_b = cut(tmin_b, 
-                                      breaks = c(-Inf, -20, -10, -5, 5, 10, 20, Inf),
-                                      labels = c("< -20",  "-20 - -10", "-10 - -5", "-5 - 5", "5 - 10", "10 - 20","> 20"),
+                                      breaks = c(-Inf, -5, -2, -1, 1, 2, 5, Inf),
+                                      labels = c("< -5",  "-5 - -2", "-2 - -1", "-1 - 1", "1 - 2", "2 - 5","> 5"),
                                       right = FALSE))
 
 library(lattice)
 library(sp)
 
-shp_peru = file.path(".", "data", "raw", "vectorial", "Departamentos.shp") %>% 
-  raster::shapefile() 
+shp_peru = raster::shapefile(file.path(".", "data", "raw", "vectorial", "Departamentos.shp")) 
 
 sp::SpatialPointsDataFrame(coords = qc_data_exp[, c("LON", "LAT")],
                            data = qc_data_exp[, c(9,10, 11, 12)],
