@@ -45,7 +45,9 @@ for(i in 1:length(seq_along(PISCOts))){
   anom_tmin <- tmin_normal - PISCOtmin[[ni]]
   
   writeRaster(anom_tmax, file.path(".", "data", "processed", "PISCOt", "anomalies",
-                              paste("tmax_", time(PISCOts[i]), ".nc", sep = "")))
+                              paste("tmax_", time(PISCOts[i]), ".nc", sep = "")),
+              overwrite = TRUE)
   writeRaster(anom_tmin, file.path(".", "data", "processed", "PISCOt", "anomalies",
-                              paste("tmin_", time(PISCOts[i]), ".nc", sep = "")))
+                              paste("tmin_", time(PISCOts[i]), ".nc", sep = "")),
+              overwrite = TRUE)
 }

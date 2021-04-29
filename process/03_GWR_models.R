@@ -110,7 +110,7 @@ for(i in 1:12){
   crs(GW_output1) <- crs(brick_model)
   
   writeRaster(GW_output1, file.path(".", "data", "processed", "GW_model",
-                                    paste("tmax_GWoutput_", ifelse(i < 10, formatC(i, 1, flag = "0"), as.character(i)), ".nc", sep = "")))
+                                    paste("tmax_GWoutput_", ifelse(i < 10, formatC(i, 1, flag = "0"), as.character(i)), ".nc", sep = "")), overwrite = TRUE)
 }
 
 for(i in 1:12){
@@ -205,5 +205,5 @@ for(i in 1:12){
   crs(GW_output1) <- crs(brick_model)
   
   writeRaster(GW_output1, file.path(".", "data", "processed", "GW_model",
-                                    paste("tmin_GWoutput_", ifelse(i < 10, formatC(i, 1, flag = "0"), as.character(i)), ".nc", sep = "")))
+                                    paste("tmin_GWoutput_", ifelse(i < 10, formatC(i, 1, flag = "0"), as.character(i)), ".nc", sep = "")), overwrite = TRUE)
 }

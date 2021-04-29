@@ -32,13 +32,14 @@ parallel::mclapply(1:length(PISCOts),
                                 paste("tmax_", time(PISCOts[i]), ".nc", sep = "")))
 
   anom_tmax <- disaggregate(anom_tmax, 10, method = "bilinear")
-  anom_tmax <- crop(anom_tmax, tmax_normal[[1]])
+  #anom_tmax <- mask(anom_tmax, tmax_normal[[1]])
   anom_tmax <- resample(anom_tmax, tmax_normal[[1]])
 
   PISCOtmax <- tmax_normal[[ as.numeric(format(time(PISCOts[i]), "%m")) ]] - anom_tmax
 
   writeRaster(PISCOtmax, file.path(".", "data", "processed", "PISCOt_DS", "values", "tmax",
-                                   paste("tmax_", time(PISCOts[i]), ".nc", sep = "")))
+                                   paste("tmax_", time(PISCOts[i]), ".nc", sep = "")),
+              overwrite = TRUE)
 
   ##
   
@@ -46,13 +47,14 @@ parallel::mclapply(1:length(PISCOts),
                                 paste("tmin_", time(PISCOts[i]), ".nc", sep = "")))
 
   anom_tmin <- disaggregate(anom_tmin, 10, method = "bilinear")
-  anom_tmin <- crop(anom_tmin, tmin_normal[[1]])
+  #anom_tmin <- mask(anom_tmin, tmin_normal[[1]])
   anom_tmin <- resample(anom_tmin, tmin_normal[[1]])
 
   PISCOtmin <- tmin_normal[[ as.numeric(format(time(PISCOts[i]), "%m")) ]] - anom_tmin
 
   writeRaster(PISCOtmin, file.path(".", "data", "processed", "PISCOt_DS", "values", "tmin",
-                                   paste("tmin_", time(PISCOts[i]), ".nc", sep = "")))
+                                   paste("tmin_", time(PISCOts[i]), ".nc", sep = "")),
+              overwrite = TRUE)
 
   }, mc.cores = 8)
 
