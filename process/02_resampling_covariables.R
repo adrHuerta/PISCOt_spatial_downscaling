@@ -23,7 +23,12 @@ dim(PISCOtmax_normal) == dim(lst_night_res[[1]])
 dim(PISCOtmax_normal) == dim(z_res)
 
 #
-writeRaster(lst_day_res, "./data/processed/LST/LST_DAYres.nc", overwrite = TRUE)
-writeRaster(lst_night_res, "./data/processed/LST/LST_NIGHTres.nc", overwrite = TRUE)
-writeRaster(z_res, "./data/processed/Z/Zres.nc", overwrite = TRUE)
+writeRaster(lst_day_res, "./data/processed/LST/LST_DAYres.nc", overwrite = TRUE,
+            datatype = 'FLT4S', force_v4 = TRUE, compression = 7)
+
+writeRaster(lst_night_res, "./data/processed/LST/LST_NIGHTres.nc", overwrite = TRUE,
+            datatype = 'FLT4S', force_v4 = TRUE, compression = 7)
+
+writeRaster(z_res, "./data/processed/Z/Zres.nc", overwrite = TRUE,
+            datatype = 'FLT4S', force_v4 = TRUE, compression = 7)
 

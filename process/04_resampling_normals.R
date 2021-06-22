@@ -41,7 +41,8 @@ for(i in 1:12){
                         paste("tmax_",
                               ifelse(i < 10, formatC(i, 1, flag = "0"), as.character(i)),
                               ".nc", sep = "")),
-              overwrite = TRUE)
+              overwrite = TRUE,
+              datatype = 'FLT4S', force_v4 = TRUE, compression = 7)
 }
 
 
@@ -67,88 +68,6 @@ for(i in 1:12){
                         paste("tmin_",
                               ifelse(i < 10, formatC(i, 1, flag = "0"), as.character(i)),
                               ".nc", sep = "")),
-              overwrite = TRUE)
+              overwrite = TRUE,
+              datatype = 'FLT4S', force_v4 = TRUE, compression = 7)
 }
-
-
-
-
-# r0 <- brick("./data/raw/LST/LST_DAY.nc")[[1]]
-# r1 <- crop(brick("./data/raw/Z/DEM.nc")[[1]], r0)
-# r0 <- crop(r0, r1)
-# r <- brick(r0, r1)[[1]]
-# crs(r) <- crs(brick("./data/processed/GW_model/tmax_GWoutput_01.nc"))
-# 
-# # projection(r) <- projection(tmin)
-# r2 <- aggregate(r, 7)
-# 
-# 
-# #
-# GW_exp <- brick("./data/processed/GW_model/tmax_GWoutput_01.nc")
-# names(GW_exp) <- c("Intercept", "LST_coef", "Z_coef", "GW_residual")
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# GW_exp <- brick("./data/processed/GW_model/tmax_GWoutput_01.nc")
-# names(GW_exp) <- c("Intercept", "LST_coef", "Z_coef", "GW_residual")
-# GW_exp <- rasterToPoints(GW_exp$Intercept, fun=NULL, spatial=TRUE)
-# GW_exp <- 
-# 
-# gs <- gstat::gstat(formula = Intercept ~ 1, 
-#                    locations = GW_exp[complete.cases(GW_exp@data$Intercept), ],
-#                    set = list(idp=2))
-# system.time(idw <- interpolate(r2, gs))
-# plot(idw)
-
-
-
-
-
-
-
-
-
-
-
-
-# 
-# library(fields)
-# m <- fastTps(coordinates(GW_exp), GW_exp$Intercept, theta =3)
-# tps <- interpolate(r, m)
-# 
-# 
-# gs <- gstat::gstat(formula=Intercept~1, locations=GW_exp)
-# idw <- interpolate(r, gs)
-# 
-# plot(idw)
-# plot(LST_coef)
-# g <- as(r2, 'SpatialPixelsDataFrame')
-# 
-# m <- automap::autofitVariogram(formula=LST~1, input_data=gwr_model$SDF[, "LST"],
-#                                fix.values = c(0,NA,NA))
-# k <- gstat::gstat(formula=LST~1, locations=gwr_model$SDF[, "LST"], model=m$var_model)
-# kp <- raster::predict(k, g)
-# 
-# library(parallel)
-# # Calculate the number of cores
-# no_cores <- 3
-# 
-# # Initiate cluster (after loading all the necessary object to R environment: meuse, meuse.grid, m)
-# cl <- makeCluster(no_cores)
-# 
-# parts <- split(x = 1:length(g), f = 1:no_cores)
-# 
-# clusterExport(cl = cl, varlist = c("gwr_model", "g", "m", "parts"), envir = .GlobalEnv)
-# clusterEvalQ(cl = cl, expr = c(library('sp'), library('gstat'), library("raster")))
-# 
-# parallelX <- parLapply(cl = cl, X = 1:no_cores, 
-#                        fun = function(x){
-#                          k <- gstat::gstat(formula=LST~1, locations=gwr_model$SDF[, "LST"], model=m$var_model)
-#                          raster::predict(k, g[parts[[x]], ])
-#                        })

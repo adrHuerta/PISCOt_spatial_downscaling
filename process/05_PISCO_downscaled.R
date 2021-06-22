@@ -39,7 +39,8 @@ parallel::mclapply(1:length(PISCOts),
 
   writeRaster(PISCOtmax, file.path(".", "data", "processed", "PISCOt_DS", "values", "tmax",
                                    paste("tmax_", time(PISCOts[i]), ".nc", sep = "")),
-              overwrite = TRUE)
+              overwrite = TRUE,
+              datatype = 'FLT4S', force_v4 = TRUE, compression = 7)
 
   ##
   
@@ -54,7 +55,8 @@ parallel::mclapply(1:length(PISCOts),
 
   writeRaster(PISCOtmin, file.path(".", "data", "processed", "PISCOt_DS", "values", "tmin",
                                    paste("tmin_", time(PISCOts[i]), ".nc", sep = "")),
-              overwrite = TRUE)
+              overwrite = TRUE,
+              datatype = 'FLT4S', force_v4 = TRUE, compression = 7)
 
   }, mc.cores = 8)
 
