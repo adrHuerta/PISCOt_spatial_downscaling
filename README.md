@@ -4,7 +4,7 @@ The downscaled version of [PISCOt v1.1, gridded maximum/minimun temperature](htt
 
 ## Code
 
-PISCOt_spatial_donwscaling is provided as a collection of R scripts but also uses some Python code. Step-by-step scripts for creating 1981-2016 downscaled version of [PISCOt v1.1](https://iridl.ldeo.columbia.edu/SOURCES/.SENAMHI/.HSR/.PISCO/.Temp/?Set-Language=es) are provided in the process directory.
+PISCOt_spatial_donwscaling is provided as a collection of R scripts. Step-by-step scripts for creating 1981-2016 downscaled version of [PISCOt v1.1](https://iridl.ldeo.columbia.edu/SOURCES/.SENAMHI/.HSR/.PISCO/.Temp/?Set-Language=es) are provided in the process directory.
 
 ## Data
 
