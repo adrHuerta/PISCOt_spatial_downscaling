@@ -8,17 +8,10 @@ PISCOt_spatial_donwscaling is provided as a collection of R scripts. Step-by-ste
 
 ## Data
 
-Project data: https://figshare.com/projects/Spatial_downscaling_of_PISCOt_v1_1/98501
-
-- Huerta, Adrian (2021): Spatial downscaling of PISCOt v1.1: minimum temperature. figshare. Dataset. https://doi.org/10.6084/m9.figshare.14016854
-
-- Huerta, Adrian (2021): Spatial downscaling of PISCOt v1.1: maximum temperature. figshare. Dataset. https://doi.org/10.6084/m9.figshare.14016632
+Collection data: https://figshare.com/collections/A_reference_evapotranspiration_gridded_database_based_on_FAO_Penman-Monteith_in_Peru_during_1981-2016/5633182
 
 ## References
 
-- Huerta, A.; Aybar, C.; Lavado-Casimiro, W. PISCO temperatura
-v.1.1. SENAMHI - DHI-2018, Lima-Perú. http://iridl.ldeo.columbia.edu/documentation/.pisco/.PISCOt_report.pdf
-
 ## Acknowledgements
 
-Development of the current version of PISCOt_spatial_donwscaling was done under the [Infraestructura Natural para la Seguridad Hídrica](https://forest-trends.org/infraestructura-natural-en-peru/) project funded by the United States Agency for International Development (USAID) and the Government of Canada and carried out by Forest Trends, CONDESAN, the Peruvian Society for Environmental Law (SPDA), EcoDecisión and researchers from Imperial College London.
+Development of the current version of PISCOeo_pm was done under the [Infraestructura Natural para la Seguridad Hídrica](https://forest-trends.org/infraestructura-natural-en-peru/) project funded by the United States Agency for International Development (USAID) and the Government of Canada and carried out by Forest Trends, CONDESAN, the Peruvian Society for Environmental Law (SPDA), EcoDecisión and researchers from Imperial College London.
